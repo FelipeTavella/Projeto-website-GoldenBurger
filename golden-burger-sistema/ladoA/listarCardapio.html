@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio — Golden Burger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="css/cardapio.css">
+</head>
+<body>
+
+<header class="app-header">
+    <a href="index.html" class="btn-voltar">⬅ Voltar</a>
+    <div class="brand"><span class="mark">🍔</span> CARDÁPIO</div>
+    <div class="mesa-info">Mesa <strong id="mesa-num">XX</strong></div>
+</header>
+
+<div class="categorias" id="categorias">
+    <button class="cat ativo" data-cat="all">Todos</button>
+    <button class="cat" data-cat="hamburguer">🍔 Hambúrgueres</button>
+    <button class="cat" data-cat="combo">🎁 Combos</button>
+    <button class="cat" data-cat="porcao">🍟 Porções</button>
+    <button class="cat" data-cat="bebida">🥤 Bebidas</button>
+</div>
+
+<main class="cardapio" id="cardapio"></main>
+
+<!-- Carrinho flutuante -->
+<button class="cart-fab" id="cart-fab" onclick="toggleCart()">
+    🛒 <span id="cart-count">0</span>
+    <span class="cart-total-label" id="cart-total-label">R$ 0,00</span>
+</button>
+
+<!-- Drawer do carrinho -->
+<aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+        <h3>Seu pedido</h3>
+        <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-list" id="cart-list">
+        <p class="cart-empty">Nenhum item adicionado ainda.</p>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total</span>
+            <strong id="cart-total">R$ 0,00</strong>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="finalizar()">Enviar pedido</button>
+        <button class="btn btn-ghost btn-block" onclick="chamarGarcom()">🔔 Chamar Garçom</button>
+    </div>
+</aside>
+
+<div class="drawer-bg" id="drawer-bg" onclick="toggleCart()"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="js/cardapio.js"></script>
+</body>
+</html>

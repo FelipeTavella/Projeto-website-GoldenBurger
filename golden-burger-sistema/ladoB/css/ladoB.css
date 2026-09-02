@@ -1,0 +1,529 @@
+/* ladoB — ERP / Gestão */
+
+body {
+    background: var(--bg);
+}
+
+/* ===== Header admin ===== */
+.admin-header {
+    height: 64px;
+    background: var(--bg-elev);
+    border-bottom: 1px solid var(--line);
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+}
+.brand .mark { color: var(--accent); }
+.badge-internal {
+    background: rgba(255, 138, 0, 0.15);
+    color: var(--accent);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-left: 8px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+.user-name { color: var(--text); font-weight: 600; }
+.time {
+    background: var(--bg);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ===== Layout ===== */
+.admin-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: calc(100vh - 64px);
+}
+
+.sidebar {
+    background: var(--bg-elev);
+    border-right: 1px solid var(--line);
+    padding: 24px 12px;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nav-item {
+    background: transparent;
+    border: 0;
+    color: var(--text-muted);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.nav-item:hover {
+    background: var(--bg-elev-2);
+    color: var(--text);
+}
+
+.nav-item.ativo {
+    background: var(--accent);
+    color: #1a0f00;
+    font-weight: 600;
+}
+
+.nav-item .badge-count {
+    margin-left: auto;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.nav-item.ativo .badge-count {
+    background: #1a0f00;
+    color: var(--accent);
+}
+
+/* ===== Conteúdo ===== */
+.admin-content {
+    padding: 32px;
+    overflow-y: auto;
+}
+
+.modulo { display: none; }
+.modulo.ativo { display: block; }
+
+.mod-head {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.mod-head h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+}
+.mod-head p { color: var(--text-muted); margin-top: 4px; }
+
+/* ===== Cards de resumo ===== */
+.cards-resumo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.card-stat {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.card-stat small { color: var(--text-muted); font-size: 0.85rem; display: block; margin-bottom: 4px; }
+.card-stat strong { color: var(--accent); font-size: 1.5rem; font-weight: 700; }
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.sub-title {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ===== Lista de pedidos ===== */
+.lista-pedidos {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pedido-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    gap: 16px;
+    align-items: center;
+}
+
+.pedido-card.status-recebido { border-left-color: #3b82f6; }
+.pedido-card.status-em_preparo { border-left-color: #f59e0b; }
+.pedido-card.status-pronto { border-left-color: var(--success); }
+.pedido-card.status-entregue { border-left-color: var(--text-muted); opacity: 0.7; }
+
+.pedido-card .mesa-tag {
+    background: var(--accent);
+    color: #1a0f00;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.pedido-card .itens { font-size: 0.9rem; color: var(--text-muted); }
+.pedido-card .itens strong { color: var(--text); display: block; margin-bottom: 4px; }
+
+.pedido-card .total {
+    font-family: var(--font-display);
+    color: var(--accent);
+    font-size: 1.4rem;
+}
+
+.pedido-card select {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+.pedido-card select:focus { outline: none; border-color: var(--accent); }
+
+/* ===== Filtros ===== */
+.filtros {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.filtro {
+    background: var(--bg-elev);
+    color: var(--text-muted);
+    border: 1px solid var(--line);
+    padding: 8px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+.filtro:hover { color: var(--text); }
+.filtro.ativo {
+    background: var(--accent);
+    color: #1a0f00;
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+/* ===== KDS (Cozinha) ===== */
+.kds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.kds-card {
+    background: var(--bg-elev);
+    border: 2px solid #f59e0b;
+    border-radius: var(--radius);
+    padding: 20px;
+}
+
+.kds-card .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--line);
+}
+.kds-card .head strong { font-size: 1.2rem; }
+.kds-card .head .timer { color: #f59e0b; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.kds-card .item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+}
+.kds-card .item:last-of-type { border-bottom: 0; }
+.kds-card .item .qtd {
+    background: var(--accent);
+    color: #1a0f00;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-right: 8px;
+}
+
+.kds-card button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px;
+    background: var(--success);
+    color: #fff;
+    border: 0;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ===== Mesas ===== */
+.mesas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.mesa-card {
+    background: var(--bg-elev);
+    border: 2px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.mesa-card:hover { transform: translateY(-2px); }
+
+.mesa-card.livre { border-color: var(--success); }
+.mesa-card.ocupada { border-color: var(--danger); background: rgba(239, 68, 68, 0.05); }
+.mesa-card.reservada { border-color: var(--warning); }
+.mesa-card.limpeza { border-color: var(--text-muted); }
+
+.mesa-card .num {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    line-height: 1;
+}
+.mesa-card .status {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    text-transform: capitalize;
+}
+.mesa-card.livre .status { color: var(--success); }
+.mesa-card.ocupada .status { color: var(--danger); }
+.mesa-card.reservada .status { color: var(--warning); }
+.mesa-card.limpeza .status { color: var(--text-muted); }
+
+/* ===== Tabela ===== */
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-elev);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+.tabela th {
+    background: var(--bg-elev-2);
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+.tabela td {
+    padding: 14px 16px;
+    border-top: 1px solid var(--line);
+    font-size: 0.95rem;
+}
+.tabela tr:hover td { background: var(--bg-elev-2); }
+
+/* ===== Relatórios ===== */
+.relatorios-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+}
+
+.relatorio-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+}
+.relatorio-card h3 {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.relatorio-card ol { padding-left: 20px; }
+.relatorio-card ol li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+}
+.relatorio-card ol li strong { color: var(--accent); }
+
+.grafico-barras {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 160px;
+    padding-top: 8px;
+}
+.grafico-barras .barra {
+    flex: 1;
+    background: linear-gradient(180deg, var(--accent), transparent);
+    border-radius: 4px 4px 0 0;
+    min-height: 4px;
+    position: relative;
+}
+.grafico-barras .barra::after {
+    content: attr(data-h);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.resumo { display: flex; flex-direction: column; gap: 12px; }
+.resumo li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+}
+.resumo li:last-child { border-bottom: 0; }
+.resumo strong { color: var(--accent); }
+
+/* ===== Notificações ===== */
+.lista-notificacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notif {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--warning);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.notif.danger { border-left-color: var(--danger); }
+.notif strong { color: var(--accent); }
+.notif small { color: var(--text-muted); margin-left: 8px; }
+
+.empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 40px;
+    font-style: italic;
+}
+
+/* ===== Toasts ===== */
+#toasts {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast-box {
+    background: var(--bg-elev);
+    border: 1px solid var(--accent);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    min-width: 280px;
+    box-shadow: var(--shadow);
+    animation: slideIn 0.3s ease;
+}
+.toast-box strong { display: block; margin-bottom: 4px; }
+.toast-box small { color: var(--text-muted); }
+.toast-box button {
+    background: transparent;
+    border: 0;
+    color: var(--text-muted);
+    cursor: pointer;
+    float: right;
+    font-size: 1.1rem;
+    margin-top: -10px;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(120%); }
+    to { transform: translateX(0); }
+}
+
+@media (max-width: 980px) {
+    .admin-layout { grid-template-columns: 1fr; }
+    .sidebar {
+        position: sticky;
+        top: 64px;
+        z-index: 50;
+        overflow-x: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+    .sidebar nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 8px;
+    }
+    .nav-item { white-space: nowrap; }
+    .relatorios-grid { grid-template-columns: 1fr; }
+    .pedido-card { grid-template-columns: 1fr; gap: 8px; }
+}

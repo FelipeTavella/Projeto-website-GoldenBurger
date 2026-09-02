@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte seu Hambúrguer — Golden Burger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="css/montar.css">
+</head>
+<body>
+
+<header class="app-header">
+    <a href="index.html" class="btn-voltar">⬅ Voltar</a>
+    <div class="brand"><span class="mark">🍔</span> MONTAR</div>
+    <button class="btn btn-primary btn-sm" onclick="toggleCart()">🛒 <span id="cart-count">0</span></button>
+</header>
+
+<div class="categorias">
+    <button class="cat">🧒 Kids</button>
+    <button class="cat ativo">🍔 Padrão</button>
+    <button class="cat">🔥 Monster</button>
+</div>
+
+<main class="montar-area">
+
+    <h2 class="title">Monte do seu jeito</h2>
+    <p class="subtitle">Toque nos ingredientes para adicionar ao seu hambúrguer.</p>
+
+    <section class="ingredientes" id="ingredientes"></section>
+
+    <section class="burger-area">
+        <div class="burger" id="burger">
+            <div class="camada pao base"></div>
+        </div>
+        <div class="prato" id="prato">
+            <span>👇 Seu hambúrguer aparece aqui</span>
+        </div>
+    </section>
+
+    <div class="preco-box">
+        <span>Total</span>
+        <strong>R$ <span id="valor">5</span>,00</strong>
+    </div>
+
+    <div class="actions">
+        <button class="btn btn-ghost" id="btnRefazer" onclick="refazerBurger()" style="display:none;">🔄 Refazer</button>
+        <button class="btn btn-primary btn-block" onclick="finalizar()">✅ Adicionar ao pedido</button>
+    </div>
+
+</main>
+
+<!-- Drawer do carrinho (mesmo do cardápio) -->
+<aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+        <h3>Seu pedido</h3>
+        <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-list" id="cart-list">
+        <p class="cart-empty">Nenhum item adicionado ainda.</p>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total</span>
+            <strong id="cart-total">R$ 0,00</strong>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="finalizarPedido()">Enviar pedido</button>
+    </div>
+</aside>
+<div class="drawer-bg" id="drawer-bg" onclick="toggleCart()"></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/montar.js"></script>
+</body>
+</html>

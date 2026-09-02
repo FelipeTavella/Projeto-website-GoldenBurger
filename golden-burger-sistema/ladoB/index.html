@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Burger — Gestão (ERP)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="css/ladoB.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="admin-header">
+    <div class="brand">
+        <span class="mark">🍔</span>
+        <span>GOLDEN <span style="color:var(--accent)">GESTÃO</span></span>
+        <span class="badge-internal">Painel interno</span>
+    </div>
+    <div class="user-info">
+        <span class="user-name">👤 Admin</span>
+        <span class="time" id="clock">00:00</span>
+    </div>
+</header>
+
+<div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav>
+            <button class="nav-item ativo" data-mod="dashboard">
+                <i class="bi bi-speedometer2"></i> Dashboard
+            </button>
+            <button class="nav-item" data-mod="notificacoes">
+                <i class="bi bi-bell-fill"></i> Notificações
+                <span class="badge-count" id="notif-count">0</span>
+            </button>
+            <button class="nav-item" data-mod="pedidos">
+                <i class="bi bi-journal-check"></i> Pedidos
+            </button>
+            <button class="nav-item" data-mod="cozinha">
+                <i class="bi bi-fire"></i> Cozinha (KDS)
+            </button>
+            <button class="nav-item" data-mod="mesas">
+                <i class="bi bi-people-fill"></i> Mesas
+            </button>
+            <button class="nav-item" data-mod="cardapio">
+                <i class="bi bi-menu-button-wide"></i> Cardápio
+            </button>
+            <button class="nav-item" data-mod="relatorios">
+                <i class="bi bi-bar-chart-line-fill"></i> Relatórios
+            </button>
+            <button class="nav-item" data-mod="funcionarios">
+                <i class="bi bi-person-badge"></i> Funcionários
+            </button>
+        </nav>
+    </aside>
+
+    <!-- Conteúdo -->
+    <main class="admin-content">
+
+        <!-- ===== Dashboard ===== -->
+        <section class="modulo ativo" id="mod-dashboard">
+            <header class="mod-head">
+                <h2>Dashboard</h2>
+                <p>Visão geral em tempo real</p>
+            </header>
+            <div class="cards-resumo">
+                <div class="card-stat">
+                    <div class="stat-icon" style="background:rgba(34,197,94,.15);color:#22c55e;"><i class="bi bi-cash-coin"></i></div>
+                    <div><small>Faturamento hoje</small><strong id="stat-faturamento">R$ 0,00</strong></div>
+                </div>
+                <div class="card-stat">
+                    <div class="stat-icon" style="background:rgba(255,138,0,.15);color:var(--accent);"><i class="bi bi-journal-check"></i></div>
+                    <div><small>Pedidos hoje</small><strong id="stat-pedidos">0</strong></div>
+                </div>
+                <div class="card-stat">
+                    <div class="stat-icon" style="background:rgba(59,130,246,.15);color:#3b82f6;"><i class="bi bi-graph-up"></i></div>
+                    <div><small>Ticket médio</small><strong id="stat-ticket">R$ 0,00</strong></div>
+                </div>
+                <div class="card-stat">
+                    <div class="stat-icon" style="background:rgba(239,68,68,.15);color:#ef4444;"><i class="bi bi-people-fill"></i></div>
+                    <div><small>Mesas ocupadas</small><strong><span id="stat-ocupadas">0</span> / <span id="stat-total-mesas">12</span></strong></div>
+                </div>
+            </div>
+
+            <h3 class="sub-title">Pedidos em andamento</h3>
+            <div class="lista-pedidos" id="dash-pedidos"></div>
+        </section>
+
+        <!-- ===== Notificações ===== -->
+        <section class="modulo" id="mod-notificacoes">
+            <header class="mod-head">
+                <h2>Notificações</h2>
+                <p>Chamados de garçons e solicitações das mesas</p>
+            </header>
+            <div class="lista-notificacoes" id="lista-notificacoes">
+                <p class="empty">Nenhuma notificação no momento.</p>
+            </div>
+        </section>
+
+        <!-- ===== Pedidos ===== -->
+        <section class="modulo" id="mod-pedidos">
+            <header class="mod-head">
+                <h2>Pedidos</h2>
+                <p>Gerencie todos os pedidos da casa</p>
+            </header>
+
+            <div class="filtros">
+                <button class="filtro ativo" data-status="todos">Todos</button>
+                <button class="filtro" data-status="recebido">📥 Recebidos</button>
+                <button class="filtro" data-status="em_preparo">🍳 Preparando</button>
+                <button class="filtro" data-status="pronto">✅ Prontos</button>
+                <button class="filtro" data-status="entregue">🚚 Entregues</button>
+            </div>
+
+            <div class="lista-pedidos" id="lista-pedidos"></div>
+        </section>
+
+        <!-- ===== Cozinha (KDS) ===== -->
+        <section class="modulo" id="mod-cozinha">
+            <header class="mod-head">
+                <h2>Cozinha (KDS)</h2>
+                <p>Apenas pedidos em preparo</p>
+            </header>
+            <div class="kds-grid" id="kds-grid"></div>
+        </section>
+
+        <!-- ===== Mesas ===== -->
+        <section class="modulo" id="mod-mesas">
+            <header class="mod-head">
+                <h2>Mesas</h2>
+                <p>Status em tempo real</p>
+            </header>
+            <div class="mesas-grid" id="mesas-grid"></div>
+        </section>
+
+        <!-- ===== Cardápio ===== -->
+        <section class="modulo" id="mod-cardapio">
+            <header class="mod-head">
+                <h2>Cardápio</h2>
+                <button class="btn btn-primary" onclick="alert('Em breve: cadastro de itens')">+ Novo item</button>
+            </header>
+            <table class="tabela">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Preço</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-cardapio"></tbody>
+            </table>
+        </section>
+
+        <!-- ===== Relatórios ===== -->
+        <section class="modulo" id="mod-relatorios">
+            <header class="mod-head">
+                <h2>Relatórios</h2>
+                <p>Performance da casa</p>
+            </header>
+
+            <div class="relatorios-grid">
+                <div class="relatorio-card">
+                    <h3>Mais vendidos</h3>
+                    <ol id="mais-vendidos"></ol>
+                </div>
+                <div class="relatorio-card">
+                    <h3>Vendas por hora</h3>
+                    <div class="grafico-barras" id="grafico-barras"></div>
+                </div>
+                <div class="relatorio-card">
+                    <h3>Resumo do dia</h3>
+                    <ul class="resumo">
+                        <li><span>Pedidos</span><strong id="r-pedidos">0</strong></li>
+                        <li><span>Faturamento</span><strong id="r-fat">R$ 0,00</strong></li>
+                        <li><span>Ticket médio</span><strong id="r-ticket">R$ 0,00</strong></li>
+                        <li><span>Cancelamentos</span><strong id="r-cancel">0</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Funcionários ===== -->
+        <section class="modulo" id="mod-funcionarios">
+            <header class="mod-head">
+                <h2>Funcionários</h2>
+                <button class="btn btn-primary">+ Novo</button>
+            </header>
+            <table class="tabela">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cargo</th>
+                        <th>Turno</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-funcionarios"></tbody>
+            </table>
+        </section>
+
+    </main>
+</div>
+
+<!-- Container de toasts -->
+<div id="toasts"></div>
+
+<script src="js/ladoB.js"></script>
+</body>
+</html>

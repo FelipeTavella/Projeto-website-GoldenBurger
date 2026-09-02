@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Burger — Mesa XX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="css/ladoA.css">
+</head>
+<body>
+
+<header class="app-header">
+    <div class="brand"><span class="mark">🍔</span> GOLDEN <span style="color:var(--accent)">BURGER</span></div>
+    <div class="mesa-info">Mesa <strong id="mesa-num">XX</strong></div>
+</header>
+
+<main class="container">
+
+    <button class="card-big garcom animate__animated animate__pulse animate__infinite" onclick="chamarGarcom()">
+        <div class="icon">🔔</div>
+        <div class="title">Chamar Garçom</div>
+        <div class="sub">Solicitar atendimento ou pedir a conta</div>
+    </button>
+
+    <a href="listarCardapio.html" class="card-big burguer-link">
+        <div class="icon">🍔</div>
+        <div class="title">Ver Cardápio</div>
+        <div class="sub">Hambúrgueres, combos, porções e bebidas</div>
+    </a>
+
+</main>
+
+<footer class="app-footer">
+
+    <button class="footer-btn auxiliar" onclick="verPedidos()">
+        📋 Pedidos da mesa
+    </button>
+
+    <a href="MontarHamburguer.html" class="footer-btn custom-link">
+        <span class="check-dot"></span>
+        Montar meu hambúrguer
+    </a>
+
+</footer>
+
+<!-- Modal de confirmação -->
+<div class="modal-bg" id="modal" onclick="fecharModal(event)">
+    <div class="modal-card">
+        <h3 id="modal-title">Chamar Garçom?</h3>
+        <p id="modal-text">Vamos avisar a equipe para ir até a sua mesa.</p>
+        <div class="modal-actions">
+            <button class="btn btn-ghost" onclick="fecharModal()">Cancelar</button>
+            <button class="btn btn-primary" id="modal-confirm" onclick="confirmarAcao()">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="js/ladoA.index.js"></script>
+</body>
+</html>
